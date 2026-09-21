@@ -37,14 +37,22 @@ class PDFGenerator:
         # Vi kan koppla in fuktberäkningsfunktionen senare när vi bygger flik 4
         self.calc_moisture_func = calc_moisture_func 
 
-    def generate_summary(self):
+    def _format_u(self, value):
+        try:
+            decimals = int(self.app_data["u_value_decimals_var"].get())
+        except (KeyError, ValueError, TypeError):
+            decimals = 2
+        decimals = max(0, min(4, decimals))
+        return f"{value:.{decimals}f}"
+
+    def generate_summary(self, include_um=True):
         data = self.app_data
         
         if not data["saved_parts"]:
             messagebox.showwarning("Tom rapport", "Rapporten är tom.")
             return
             
-        if data["um_expanded"]:
+        if include_um and data["um_expanded"]:
             missing = [p['namn'] for p in data["saved_parts"] if p.get('area_net', 0.0) == 0.0]
             if missing:
                 svar = messagebox.askyesno(
@@ -54,7 +62,8 @@ class PDFGenerator:
                 if not svar: return
         
         proj_namn = data["proj_name_var"].get().strip() or "Projektnamn"
-        foreslaget_filnamn = f"{proj_namn.replace(' ', '_')}_U-värden_Sammanställning.pdf"
+        rapporttyp = "U-värden_Sammanställning" if include_um else "Byggnadsdelar"
+        foreslaget_filnamn = f"{proj_namn.replace(' ', '_')}_{rapporttyp}.pdf"
         
         filepath = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF", "*.pdf")], initialfile=foreslaget_filnamn)
         if not filepath: return 
@@ -82,7 +91,8 @@ class PDFGenerator:
 
         pdf.set_y(100)
         pdf.set_font("helvetica", size=24, style="B")
-        pdf.cell(0, 15, "Sammanställning: U-värden", new_x="LMARGIN", new_y="NEXT", align="C")
+        rubrik = "Sammanställning: U-värden" if include_um else "Sammanställning: Byggnadsdelar"
+        pdf.cell(0, 15, rubrik, new_x="LMARGIN", new_y="NEXT", align="C")
         pdf.set_font("helvetica", size=14, style="I")
         pdf.cell(0, 10, "Beräkning av värmegenomgångskoefficient", new_x="LMARGIN", new_y="NEXT", align="C")
 
@@ -210,9 +220,9 @@ class PDFGenerator:
                 h = part.get('height_above', 0)
                 pdf.cell(0, 5, f"Djup under mark (z): {z:.2f} m | Höjd över mark: {h:.2f} m", new_x="LMARGIN", new_y="NEXT")
                 if z > 0:
-                    pdf.cell(0, 5, f"U-värde under mark (U_mark): {part.get('u_mark', 0):.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                    pdf.cell(0, 5, f"U-värde under mark (U_mark): {self._format_u(part.get('u_mark', 0))} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
                 if h > 0:
-                    pdf.cell(0, 5, f"U-värde över mark (U_luft): {part.get('u_luft', 0):.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                    pdf.cell(0, 5, f"U-värde över mark (U_luft): {self._format_u(part.get('u_luft', 0))} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
                 pdf.cell(0, 5, f"Väggskiktens totala värmemotstånd (R_tot): {part['r_tot']:.3f} m²K/W", new_x="LMARGIN", new_y="NEXT")
             else:
                 pdf.cell(0, 6, "Beräknat enligt SS-EN ISO 6946:", new_x="LMARGIN", new_y="NEXT")
@@ -227,7 +237,7 @@ class PDFGenerator:
             if du > 0 or b != 1.0:
                 pdf.ln(2)
                 pdf.set_font("helvetica", size=10, style="B")
-                pdf.cell(0, 5, f"Grund U-värde (U_c): {u_base:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 5, f"Grund U-värde (U_c): {self._format_u(u_base)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
                 pdf.set_font("helvetica", size=10, style="I")
                 if du > 0:
                     pdf.cell(0, 5, f"Korrektionsterm (Delta U): +{du:.3f} W/(m²K) (Fästdon/Spalter)", new_x="LMARGIN", new_y="NEXT")
@@ -236,13 +246,30 @@ class PDFGenerator:
 
             pdf.ln(3)
             pdf.set_font("helvetica", size=12, style="B")
-            area_text = f"  [Area: {part.get('area_net', 0)} m²]" if data["um_expanded"] else ""
-            pdf.cell(0, 8, f"U-värde för {part['namn']}: {part['u_value']:.3f} W/(m²K){area_text}", new_x="LMARGIN", new_y="NEXT")
+            area_text = f"  [Area: {part.get('area_net', 0)} m²]" if include_um and data["um_expanded"] else ""
+            pdf.cell(0, 8, f"U-värde för {part['namn']}: {self._format_u(part['u_value'])} W/(m²K){area_text}", new_x="LMARGIN", new_y="NEXT")
             pdf.ln(5)
             pdf.line(10, pdf.get_y(), 200, pdf.get_y())
             pdf.ln(5)
 
-        if data["um_expanded"]:
+        if not include_um:
+            pdf.add_page()
+            pdf.set_font("helvetica", size=16, style="B")
+            pdf.cell(0, 10, "Sammanställning: Byggnadsdelar", new_x="LMARGIN", new_y="NEXT")
+            pdf.ln(5)
+
+            pdf.set_font("helvetica", size=10, style="B")
+            pdf.cell(130, 8, "Byggnadsdel", border=1)
+            pdf.cell(60, 8, "Up-värde [W/m²K]", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+
+            pdf.set_font("helvetica", size=10)
+            for part in data["saved_parts"]:
+                if part.get("is_window"):
+                    continue
+                pdf.cell(130, 8, part["namn"], border=1)
+                pdf.cell(60, 8, self._format_u(part['u_value']), border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+
+        if include_um and data["um_expanded"]:
             pdf.add_page()
             pdf.set_font("helvetica", size=16, style="B")
             pdf.cell(0, 10, "Sammanställning: Genomsnittligt U-värde (Um)", new_x="LMARGIN", new_y="NEXT")
@@ -251,7 +278,7 @@ class PDFGenerator:
             pdf.set_font("helvetica", size=10, style="B")
             pdf.cell(80, 8, "Byggnadsdel", border=1)
             pdf.cell(30, 8, "Area (A) [m²]", border=1, align="C")
-            pdf.cell(40, 8, "U-värde (U) [W/m²K]", border=1, align="C")
+            pdf.cell(40, 8, "Up-värde (Up) [W/m²K]", border=1, align="C")
             pdf.cell(40, 8, "U * A [W/K]", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
 
             pdf.set_font("helvetica", size=10)
@@ -276,7 +303,7 @@ class PDFGenerator:
                     
                     pdf.cell(80, 8, display_name, border=1)
                     pdf.cell(30, 8, f"{anet:.1f}", border=1, align="C")
-                    pdf.cell(40, 8, f"{u:.3f}", border=1, align="C")
+                    pdf.cell(40, 8, self._format_u(u), border=1, align="C")
                     pdf.cell(40, 8, f"{ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
                 
                 if awin > 0:
@@ -286,34 +313,41 @@ class PDFGenerator:
                     pdf.set_text_color(100, 100, 100) 
                     pdf.cell(80, 8, "  -> Fönster/Dörrar i ovanstående", border=1)
                     pdf.cell(30, 8, f"{awin:.1f}", border=1, align="C")
-                    pdf.cell(40, 8, f"{uwin:.3f}", border=1, align="C")
+                    pdf.cell(40, 8, self._format_u(uwin), border=1, align="C")
                     pdf.cell(40, 8, f"{uawin:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
                     pdf.set_text_color(0, 0, 0)
 
+            use_thermal_bridges = data.get("use_thermal_bridges", True)
+            if hasattr(use_thermal_bridges, "get"):
+                use_thermal_bridges = bool(use_thermal_bridges.get())
+            else:
+                use_thermal_bridges = bool(use_thermal_bridges)
+
             kb_type = data["kb_type_var"].get()
             kb_ua = 0.0
-            
-            if "%" in kb_type:
-                try: kb_val = float(data["kb_val_var"].get())
-                except ValueError: kb_val = 0.0
-                kb_ua = total_ua * (kb_val / 100)
-                
-                pdf.set_font("helvetica", size=10, style="I")
-                pdf.cell(80, 8, f"Köldbryggor ({kb_val}% påslag)", border=1)
-                pdf.cell(30, 8, "-", border=1, align="C")
-                pdf.cell(40, 8, "-", border=1, align="C")
-                pdf.cell(40, 8, f"{kb_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
-            else:
-                pdf.set_font("helvetica", size=10, style="I")
-                for kb in data["thermal_bridges"]:
-                    b_ua = kb['length'] * kb['psi']
-                    kb_ua += b_ua
-                    pdf.cell(80, 8, f"Köldbrygga: {kb['name'][:22]}", border=1)
-                    pdf.cell(30, 8, f"{kb['length']} m/st", border=1, align="C")
-                    pdf.cell(40, 8, f"{kb['psi']} W/mK", border=1, align="C")
-                    pdf.cell(40, 8, f"{b_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
-            
-            total_ua += kb_ua
+
+            if use_thermal_bridges:
+                if "%" in kb_type:
+                    try: kb_val = float(data["kb_val_var"].get())
+                    except ValueError: kb_val = 0.0
+                    kb_ua = total_ua * (kb_val / 100)
+
+                    pdf.set_font("helvetica", size=10, style="I")
+                    pdf.cell(80, 8, f"Köldbryggor ({kb_val}% påslag)", border=1)
+                    pdf.cell(30, 8, "-", border=1, align="C")
+                    pdf.cell(40, 8, "-", border=1, align="C")
+                    pdf.cell(40, 8, f"{kb_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+                else:
+                    pdf.set_font("helvetica", size=10, style="I")
+                    for kb in data["thermal_bridges"]:
+                        b_ua = kb['length'] * kb['psi']
+                        kb_ua += b_ua
+                        pdf.cell(80, 8, f"Köldbrygga: {kb['name'][:22]}", border=1)
+                        pdf.cell(30, 8, f"{kb['length']} m/st", border=1, align="C")
+                        pdf.cell(40, 8, f"{kb['psi']} W/mK", border=1, align="C")
+                        pdf.cell(40, 8, f"{b_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+
+                total_ua += kb_ua
             
             pdf.ln(5)
             # =====================================================================
@@ -327,11 +361,11 @@ class PDFGenerator:
             pdf.ln(2)
             
             um_result = (total_ua / total_area) if total_area > 0 else 0.0 
-            pdf.cell(0, 6, f"Um = {total_ua:.2f} / {total_area:.2f} = {um_result:.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 6, f"Um = {total_ua:.2f} / {total_area:.2f} = {self._format_u(um_result)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
             
             pdf.ln(5)
             pdf.set_font("helvetica", size=14, style="B")
-            pdf.cell(0, 10, f"RESULTAT Um: {um_result:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 10, f"RESULTAT Um: {self._format_u(um_result)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
             
             try:
                 um_req = float(data["um_req_var"].get())
@@ -346,7 +380,7 @@ class PDFGenerator:
 
             if um_req > 0 and include_requirement_status:
                 pdf.set_font("helvetica", size=12, style="I")
-                pdf.cell(0, 6, f"Krav på Um-värde: {um_req:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"Krav på Um-värde: {self._format_u(um_req)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
                 if round(um_result, 3) <= round(um_req, 3):
                     pdf.set_text_color(0, 150, 0) 
@@ -530,7 +564,7 @@ class PDFGenerator:
                     pdf.cell(0, 6, f"Eftersom d_t >= B' ({dt:.3f} >= {B_prime:.3f}) används direkt formel:", new_x="LMARGIN", new_y="NEXT")
                     pdf.cell(0, 6, f"U_base = Lambda_mark / (0.457 * B' + d_t)", new_x="LMARGIN", new_y="NEXT")
                     
-                pdf.cell(0, 6, f"U_base = {part.get('u_base'):.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"U_base = {self._format_u(part.get('u_base'))} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
             elif part.get("is_basement"):
                 z = part.get('depth_z', 0)
@@ -541,18 +575,18 @@ class PDFGenerator:
                 pdf.cell(0, 6, "SS-EN ISO 13370 - Källarvägg (Viktning ovan/under mark)", new_x="LMARGIN", new_y="NEXT")
                 pdf.cell(0, 6, f"Höjd under mark (z): {z} m", new_x="LMARGIN", new_y="NEXT")
                 pdf.cell(0, 6, "U_mark beräknas via d_w = Lambda_mark * (R_si + R_w)", new_x="LMARGIN", new_y="NEXT")
-                pdf.cell(0, 6, f"U_mark = {u_mark:.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"U_mark = {self._format_u(u_mark)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
                 pdf.ln(2)
                 pdf.cell(0, 6, f"Höjd över mark (h): {h} m", new_x="LMARGIN", new_y="NEXT")
-                pdf.cell(0, 6, f"U_luft = 1 / R_tot = {u_luft:.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"U_luft = 1 / R_tot = {self._format_u(u_luft)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
                 pdf.ln(2)
                 pdf.cell(0, 6, "U_base = (z * U_mark + h * U_luft) / (z + h)", new_x="LMARGIN", new_y="NEXT")
-                pdf.cell(0, 6, f"U_base = ({z} * {u_mark:.4f} + {h} * {u_luft:.4f}) / ({z+h}) = {part.get('u_base'):.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"U_base = ({z} * {self._format_u(u_mark)} + {h} * {self._format_u(u_luft)}) / ({z+h}) = {self._format_u(part.get('u_base'))} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
             else:
                 pdf.cell(0, 6, "Grundekvation för värmegenomgångskoefficient:", new_x="LMARGIN", new_y="NEXT")
                 pdf.cell(0, 6, "U_base = 1 / R_tot", new_x="LMARGIN", new_y="NEXT")
-                pdf.cell(0, 6, f"U_base = 1 / {part['r_tot']:.3f} = {part.get('u_base', part['u_value']):.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"U_base = 1 / {part['r_tot']:.3f} = {self._format_u(part.get('u_base', part['u_value']))} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
             
             pdf.ln(5)
             
@@ -568,11 +602,11 @@ class PDFGenerator:
             pdf.cell(0, 6, f"b-faktor (Temperaturreduktion) = {b:.2f}", new_x="LMARGIN", new_y="NEXT")
             pdf.ln(2)
             pdf.cell(0, 6, "Slutgiltigt U = (U_base + Delta_U) * b", new_x="LMARGIN", new_y="NEXT")
-            pdf.cell(0, 6, f"Slutgiltigt U = ({u_base:.4f} + {du:.4f}) * {b:.2f}", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 6, f"Slutgiltigt U = ({self._format_u(u_base)} + {du:.4f}) * {b:.2f}", new_x="LMARGIN", new_y="NEXT")
             
             pdf.ln(5)
             pdf.set_font("helvetica", size=14, style="B")
-            pdf.cell(0, 10, f"U-VÄRDE: {part['u_value']:.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 10, f"U-VÄRDE: {self._format_u(part['u_value'])} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
         if data["um_expanded"]:
             pdf.add_page()
@@ -583,7 +617,7 @@ class PDFGenerator:
             pdf.set_font("helvetica", size=10, style="B")
             pdf.cell(80, 8, "Byggnadsdel", border=1)
             pdf.cell(30, 8, "Area (A) [m²]", border=1, align="C")
-            pdf.cell(40, 8, "U-värde (U) [W/m²K]", border=1, align="C")
+            pdf.cell(40, 8, "Up-värde [W/m²K]", border=1, align="C")
             pdf.cell(40, 8, "U * A [W/K]", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
 
             pdf.set_font("helvetica", size=10)
@@ -608,7 +642,7 @@ class PDFGenerator:
                     
                     pdf.cell(80, 8, display_name, border=1)
                     pdf.cell(30, 8, f"{anet:.1f}", border=1, align="C")
-                    pdf.cell(40, 8, f"{u:.3f}", border=1, align="C")
+                    pdf.cell(40, 8, self._format_u(u), border=1, align="C")
                     pdf.cell(40, 8, f"{ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
                 
                 if awin > 0:
@@ -618,34 +652,41 @@ class PDFGenerator:
                     pdf.set_text_color(100, 100, 100) 
                     pdf.cell(80, 8, "  -> Fönster/Dörrar i ovanstående", border=1)
                     pdf.cell(30, 8, f"{awin:.1f}", border=1, align="C")
-                    pdf.cell(40, 8, f"{uwin:.3f}", border=1, align="C")
+                    pdf.cell(40, 8, self._format_u(uwin), border=1, align="C")
                     pdf.cell(40, 8, f"{uawin:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
                     pdf.set_text_color(0, 0, 0)
 
+            use_thermal_bridges = data.get("use_thermal_bridges", True)
+            if hasattr(use_thermal_bridges, "get"):
+                use_thermal_bridges = bool(use_thermal_bridges.get())
+            else:
+                use_thermal_bridges = bool(use_thermal_bridges)
+
             kb_type = data["kb_type_var"].get()
             kb_ua = 0.0
-            
-            if "%" in kb_type:
-                try: kb_val = float(data["kb_val_var"].get())
-                except ValueError: kb_val = 0.0
-                kb_ua = total_ua * (kb_val / 100)
-                
-                pdf.set_font("helvetica", size=10, style="I")
-                pdf.cell(80, 8, f"Köldbryggor ({kb_val}% påslag)", border=1)
-                pdf.cell(30, 8, "-", border=1, align="C")
-                pdf.cell(40, 8, "-", border=1, align="C")
-                pdf.cell(40, 8, f"{kb_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
-            else:
-                pdf.set_font("helvetica", size=10, style="I")
-                for kb in data["thermal_bridges"]:
-                    b_ua = kb['length'] * kb['psi']
-                    kb_ua += b_ua
-                    pdf.cell(80, 8, f"Köldbrygga: {kb['name'][:22]}", border=1)
-                    pdf.cell(30, 8, f"{kb['length']} m/st", border=1, align="C")
-                    pdf.cell(40, 8, f"{kb['psi']} W/mK", border=1, align="C")
-                    pdf.cell(40, 8, f"{b_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
-            
-            total_ua += kb_ua
+
+            if use_thermal_bridges:
+                if "%" in kb_type:
+                    try: kb_val = float(data["kb_val_var"].get())
+                    except ValueError: kb_val = 0.0
+                    kb_ua = total_ua * (kb_val / 100)
+
+                    pdf.set_font("helvetica", size=10, style="I")
+                    pdf.cell(80, 8, f"Köldbryggor ({kb_val}% påslag)", border=1)
+                    pdf.cell(30, 8, "-", border=1, align="C")
+                    pdf.cell(40, 8, "-", border=1, align="C")
+                    pdf.cell(40, 8, f"{kb_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+                else:
+                    pdf.set_font("helvetica", size=10, style="I")
+                    for kb in data["thermal_bridges"]:
+                        b_ua = kb['length'] * kb['psi']
+                        kb_ua += b_ua
+                        pdf.cell(80, 8, f"Köldbrygga: {kb['name'][:22]}", border=1)
+                        pdf.cell(30, 8, f"{kb['length']} m/st", border=1, align="C")
+                        pdf.cell(40, 8, f"{kb['psi']} W/mK", border=1, align="C")
+                        pdf.cell(40, 8, f"{b_ua:.2f}", border=1, align="C", new_x="LMARGIN", new_y="NEXT")
+
+                total_ua += kb_ua
             
             pdf.ln(5)
             # =====================================================================
@@ -659,20 +700,26 @@ class PDFGenerator:
             pdf.ln(2)
             
             um_result = (total_ua / total_area) if total_area > 0 else 0.0 
-            pdf.cell(0, 6, f"Um = {total_ua:.2f} / {total_area:.2f} = {um_result:.4f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 6, f"Um = {total_ua:.2f} / {total_area:.2f} = {self._format_u(um_result)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
             
             pdf.ln(5)
             pdf.set_font("helvetica", size=14, style="B")
-            pdf.cell(0, 10, f"RESULTAT Um: {um_result:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+            pdf.cell(0, 10, f"RESULTAT Um: {self._format_u(um_result)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
             
             try:
                 um_req = float(data["um_req_var"].get())
             except ValueError:
                 um_req = 0.0
 
-            if um_req > 0:
+            requirement_status_value = data.get("print_um_requirement_status")
+            if hasattr(requirement_status_value, "get"):
+                include_requirement_status = bool(requirement_status_value.get())
+            else:
+                include_requirement_status = bool(requirement_status_value if requirement_status_value is not None else True)
+
+            if um_req > 0 and include_requirement_status:
                 pdf.set_font("helvetica", size=12, style="I")
-                pdf.cell(0, 6, f"Krav på Um-värde: {um_req:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
+                pdf.cell(0, 6, f"Krav på Um-värde: {self._format_u(um_req)} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
                 if round(um_result, 3) <= round(um_req, 3):
                     pdf.set_text_color(0, 150, 0) 

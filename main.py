@@ -31,8 +31,10 @@ class UValueApp:
             "moisture_indices": [],
             "climate_data": None,
             "climate_filename": "",
-            "um_expanded": True,        
+            "um_expanded": True,
+            "use_thermal_bridges": tk.BooleanVar(value=True),
             "um_req_var": tk.StringVar(value="0.40"),
+            "u_value_decimals_var": tk.StringVar(value="2"),
             "print_um_requirement_status": tk.BooleanVar(value=True),
             "kb_type_var": tk.StringVar(value="Schablon (% påslag)"),
             "kb_val_var": tk.StringVar(value="20"),
@@ -134,6 +136,9 @@ class UValueApp:
         
         self.btn_pdf = ttk.Button(self.frame_pdf_btns, text="📄 Generera PDF-rapport (Sammanställning)", command=self.pdf_gen.generate_summary)
         self.btn_pdf.pack(pady=2)
+
+        self.btn_parts_pdf = ttk.Button(self.frame_pdf_btns, text="📄 Generera rapport för byggnadsdelar", command=lambda: self.pdf_gen.generate_summary(include_um=False))
+        self.btn_parts_pdf.pack(pady=2)
         
         self.btn_tech_pdf = ttk.Button(self.frame_pdf_btns, text="📐 Generera Teknisk Beräkningsrapport", command=self.pdf_gen.generate_technical)
         self.btn_tech_pdf.pack(pady=2)
@@ -146,7 +151,9 @@ class UValueApp:
             "signature": self.app_data["sig_var"].get(),
             "kund": self.app_data["kund_var"].get(),
             "um_expanded": bool(self.app_data.get("um_expanded", True)),
+            "use_thermal_bridges": bool(self.app_data["use_thermal_bridges"].get()),
             "um_req": self.app_data["um_req_var"].get(),
+            "u_value_decimals": self.app_data["u_value_decimals_var"].get(),
             "print_um_requirement_status": bool(self.app_data["print_um_requirement_status"].get()),
             "kb_type": self.app_data["kb_type_var"].get(),
             "kb_val": self.app_data["kb_val_var"].get(),
@@ -163,7 +170,9 @@ class UValueApp:
         self.app_data["sig_var"].set(data.get("signature", ""))
         self.app_data["kund_var"].set(data.get("kund", ""))
         self.app_data["um_req_var"].set(data.get("um_req", "0.40"))
+        self.app_data["u_value_decimals_var"].set(str(data.get("u_value_decimals", "2")))
         self.app_data["um_expanded"] = bool(data.get("um_expanded", True))
+        self.app_data["use_thermal_bridges"].set(data.get("use_thermal_bridges", True))
         self.app_data["print_um_requirement_status"].set(data.get("print_um_requirement_status", True))
 
         self.app_data["kb_type_var"].set(data.get("kb_type", "Schablon (% påslag)"))

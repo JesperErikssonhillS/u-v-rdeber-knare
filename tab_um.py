@@ -45,6 +45,11 @@ class TabUm:
 
         # --- KÖLDBRYGGOR ---
         ttk.Label(self.frame_um, text="Köldbryggor (Hela huset):", font=("Arial", 9, "bold")).grid(row=7, column=0, sticky="w")
+        ttk.Checkbutton(
+            self.frame_um,
+            text="Inkludera köldbryggor i Um",
+            variable=self.app_data["use_thermal_bridges"]
+        ).grid(row=7, column=1, columnspan=3, sticky="w", pady=(0, 5))
 
         frame_kb_top = ttk.Frame(self.frame_um)
         frame_kb_top.grid(row=8, column=0, sticky="w", pady=5)
@@ -85,6 +90,14 @@ class TabUm:
 
         ttk.Label(self.frame_um, text="Krav på Um-värde (W/m²K):", font=("Arial", 9, "bold")).grid(row=11, column=0, sticky="w")
         ttk.Entry(self.frame_um, textvariable=self.app_data["um_req_var"], width=10).grid(row=11, column=1, sticky="w", pady=5)
+        ttk.Label(self.frame_um, text="Decimaler för U-värden:").grid(row=11, column=2, sticky="w", padx=(15, 5))
+        ttk.Combobox(
+            self.frame_um,
+            textvariable=self.app_data["u_value_decimals_var"],
+            values=["0", "1", "2", "3", "4"],
+            state="readonly",
+            width=5
+        ).grid(row=11, column=3, sticky="w", pady=5)
         ttk.Checkbutton(
             self.frame_um,
             text="Skriv ut bedömning om krav uppfylls",
@@ -109,7 +122,11 @@ class TabUm:
 
             part_names.append(f"{i+1}. {part['namn']}")
 
-            um_str = f"{part['namn']}{ori_str}   |   U-värde: {part['u_value']:.3f} W/m²K"
+            try:
+                u_decimals = int(self.app_data["u_value_decimals_var"].get())
+            except (KeyError, ValueError, TypeError):
+                u_decimals = 2
+            um_str = f"{part['namn']}{ori_str}   |   U-värde: {part['u_value']:.{u_decimals}f} W/m²K"
             if anet > 0 or awin > 0:
                 um_str += f"   |   Area: {anet} m²"
                 if awin > 0:
