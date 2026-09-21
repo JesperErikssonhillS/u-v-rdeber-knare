@@ -1,0 +1,623 @@
+{
+    "Gipsskiva (Standard)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.25,
+        "density": 900.0,
+        "heat_capacity": 1000.0,
+        "mu": 10.0,
+        "porosity": 0.65,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 5.0], [0.8, 15.0], [1.0, 30.0]]
+    },
+    "Gipsskiva (Brand/Hård)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.25,
+        "density": 1000.0,
+        "heat_capacity": 1000.0,
+        "mu": 10.0,
+        "porosity": 0.55,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 6.0], [0.8, 18.0], [1.0, 35.0]]
+    },
+    "Gipsskiva (Ute/Vindskydd)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.25,
+        "density": 750.0,
+        "heat_capacity": 1000.0,
+        "mu": 10.0,
+        "porosity": 0.60,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 5.0], [0.8, 15.0], [1.0, 30.0]]
+    },
+    "OSB-skiva": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.13,
+        "density": 650.0,
+        "heat_capacity": 1700.0,
+        "mu": 200.0,
+        "porosity": 0.50,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 40.0], [0.8, 70.0], [1.0, 120.0]]
+    },
+    "Plywood": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.13,
+        "density": 500.0,
+        "heat_capacity": 1600.0,
+        "mu": 200.0,
+        "porosity": 0.60,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 35.0], [0.8, 65.0], [1.0, 110.0]]
+    },
+    "Spånskiva": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.14,
+        "density": 650.0,
+        "heat_capacity": 1700.0,
+        "mu": 50.0,
+        "porosity": 0.50,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 45.0], [0.8, 80.0], [1.0, 130.0]]
+    },
+    "MDF-skiva": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.14,
+        "density": 700.0,
+        "heat_capacity": 1700.0,
+        "mu": 30.0,
+        "porosity": 0.45,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 50.0], [0.8, 85.0], [1.0, 140.0]]
+    },
+    "Träfiberskiva (Hård/Masonit)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.17,
+        "density": 900.0,
+        "heat_capacity": 1700.0,
+        "mu": 70.0,
+        "porosity": 0.35,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 60.0], [0.8, 100.0], [1.0, 160.0]]
+    },
+    "Träfiberskiva (Porös/Asfaboard)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.05,
+        "density": 250.0,
+        "heat_capacity": 1700.0,
+        "mu": 5.0,
+        "porosity": 0.80,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 20.0], [0.8, 40.0], [1.0, 80.0]]
+    },
+    "Cementbaserad skiva (Minerit)": {
+        "category": "▬▬▬ 📄 SKIVMATERIAL ▬▬▬",
+        "lambda": 0.35,
+        "density": 1300.0,
+        "heat_capacity": 1000.0,
+        "mu": 40.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 30.0], [1.0, 80.0]]
+    },
+    "Mineralull (Standard)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.036,
+        "density": 30.0,
+        "heat_capacity": 1030.0,
+        "mu": 1.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 0.2], [1.0, 1.0]]
+    },
+    "Mineralull (Lågenergi)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.033,
+        "density": 40.0,
+        "heat_capacity": 1030.0,
+        "mu": 1.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 0.2], [1.0, 1.0]]
+    },
+    "Glasull (Standard)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.037,
+        "density": 20.0,
+        "heat_capacity": 1030.0,
+        "mu": 1.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 0.2], [1.0, 1.0]]
+    },
+    "Cellplast EPS (Standard)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.038,
+        "density": 15.0,
+        "heat_capacity": 1450.0,
+        "mu": 60.0,
+        "porosity": 0.98,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.5]]
+    },
+    "Cellplast EPS (Grafit)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.031,
+        "density": 15.0,
+        "heat_capacity": 1450.0,
+        "mu": 60.0,
+        "porosity": 0.98,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.5]]
+    },
+    "Cellplast XPS": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.034,
+        "density": 35.0,
+        "heat_capacity": 1450.0,
+        "mu": 150.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.5]]
+    },
+    "Polyuretan (PUR)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.026,
+        "density": 30.0,
+        "heat_capacity": 1400.0,
+        "mu": 60.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "PIR-skiva": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.022,
+        "density": 30.0,
+        "heat_capacity": 1400.0,
+        "mu": 60.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "Träfiberisolering (Skiva)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.038,
+        "density": 160.0,
+        "heat_capacity": 2100.0,
+        "mu": 5.0,
+        "porosity": 0.85,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 40.0], [0.8, 80.0], [1.0, 150.0]]
+    },
+    "Träfiberisolering (Lösull)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.039,
+        "density": 40.0,
+        "heat_capacity": 2100.0,
+        "mu": 2.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 10.0], [0.8, 20.0], [1.0, 40.0]]
+    },
+    "Cellulosaisolering (Lösull)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.039,
+        "density": 40.0,
+        "heat_capacity": 2100.0,
+        "mu": 2.0,
+        "porosity": 0.95,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 10.0], [0.8, 20.0], [1.0, 40.0]]
+    },
+    "Skumglas": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.040,
+        "density": 115.0,
+        "heat_capacity": 1000.0,
+        "mu": 40000.0,
+        "porosity": 0.90,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Lösa lättklinkerkulor (Leca)": {
+        "category": "▬▬▬ ❄️ ISOLERING ▬▬▬",
+        "lambda": 0.10,
+        "density": 300.0,
+        "heat_capacity": 1000.0,
+        "mu": 2.0,
+        "porosity": 0.60,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 5.0], [1.0, 15.0]]
+    },
+    "Konstruktionsvirke (Furu/Gran)": {
+        "category": "▬▬▬ 🪵 TRÄ OCH MASSIVTRÄ ▬▬▬",
+        "lambda": 0.13,
+        "density": 500.0,
+        "heat_capacity": 1600.0,
+        "mu": 50.0,
+        "porosity": 0.73,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 45.0], [0.8, 80.0], [1.0, 150.0]]
+    },
+    "Limträ": {
+        "category": "▬▬▬ 🪵 TRÄ OCH MASSIVTRÄ ▬▬▬",
+        "lambda": 0.13,
+        "density": 450.0,
+        "heat_capacity": 1600.0,
+        "mu": 50.0,
+        "porosity": 0.75,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 40.0], [0.8, 75.0], [1.0, 140.0]]
+    },
+    "KL-trä (Korslimmat trä / CLT)": {
+        "category": "▬▬▬ 🪵 TRÄ OCH MASSIVTRÄ ▬▬▬",
+        "lambda": 0.13,
+        "density": 450.0,
+        "heat_capacity": 1600.0,
+        "mu": 50.0,
+        "porosity": 0.75,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 40.0], [0.8, 75.0], [1.0, 140.0]]
+    },
+    "Ek / Hårda träslag": {
+        "category": "▬▬▬ 🪵 TRÄ OCH MASSIVTRÄ ▬▬▬",
+        "lambda": 0.16,
+        "density": 700.0,
+        "heat_capacity": 1600.0,
+        "mu": 80.0,
+        "porosity": 0.55,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 60.0], [0.8, 100.0], [1.0, 180.0]]
+    },
+    "Träpanel (Fasad)": {
+        "category": "▬▬▬ 🪵 TRÄ OCH MASSIVTRÄ ▬▬▬",
+        "lambda": 0.13,
+        "density": 500.0,
+        "heat_capacity": 1600.0,
+        "mu": 50.0,
+        "porosity": 0.73,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 45.0], [0.8, 80.0], [1.0, 150.0]]
+    },
+    "Armerad betong (Tung)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 2.00,
+        "density": 2400.0,
+        "heat_capacity": 1000.0,
+        "mu": 130.0,
+        "porosity": 0.12,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 40.0], [0.8, 70.0], [1.0, 120.0]]
+    },
+    "Oarmerad betong": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 1.70,
+        "density": 2200.0,
+        "heat_capacity": 1000.0,
+        "mu": 100.0,
+        "porosity": 0.15,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 45.0], [0.8, 75.0], [1.0, 130.0]]
+    },
+    "Lättbetong (Densitet 400)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.11,
+        "density": 400.0,
+        "heat_capacity": 1050.0,
+        "mu": 6.0,
+        "porosity": 0.80,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 10.0], [0.8, 25.0], [1.0, 300.0]]
+    },
+    "Lättbetong (Densitet 500)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.14,
+        "density": 500.0,
+        "heat_capacity": 1050.0,
+        "mu": 7.0,
+        "porosity": 0.75,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 12.0], [0.8, 30.0], [1.0, 350.0]]
+    },
+    "Lättbetong (Densitet 600)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.17,
+        "density": 600.0,
+        "heat_capacity": 1050.0,
+        "mu": 8.0,
+        "porosity": 0.70,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 15.0], [0.8, 35.0], [1.0, 400.0]]
+    },
+    "Lättklinkerbetong (Leca)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.25,
+        "density": 800.0,
+        "heat_capacity": 1000.0,
+        "mu": 10.0,
+        "porosity": 0.50,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 20.0], [1.0, 150.0]]
+    },
+    "Leca Murblock (Isoler)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.12,
+        "density": 600.0,
+        "heat_capacity": 1000.0,
+        "mu": 8.0,
+        "porosity": 0.60,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 15.0], [1.0, 100.0]]
+    },
+    "Tegelsten (Massiv)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.60,
+        "density": 1600.0,
+        "heat_capacity": 800.0,
+        "mu": 15.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 10.0], [1.0, 200.0]]
+    },
+    "Tegelsten (Håltegel)": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.44,
+        "density": 1200.0,
+        "heat_capacity": 800.0,
+        "mu": 15.0,
+        "porosity": 0.45,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 8.0], [1.0, 150.0]]
+    },
+    "Fasadtegel": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 0.70,
+        "density": 1800.0,
+        "heat_capacity": 800.0,
+        "mu": 20.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 5.0], [1.0, 150.0]]
+    },
+    "Kalksandsten": {
+        "category": "▬▬▬ 🧱 MURVERK OCH BETONG ▬▬▬",
+        "lambda": 1.00,
+        "density": 1800.0,
+        "heat_capacity": 1000.0,
+        "mu": 25.0,
+        "porosity": 0.20,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 15.0], [1.0, 180.0]]
+    },
+    "Cementbruk": {
+        "category": "▬▬▬ 🪨 PUTS OCH BRUK ▬▬▬",
+        "lambda": 1.00,
+        "density": 1800.0,
+        "heat_capacity": 1000.0,
+        "mu": 25.0,
+        "porosity": 0.25,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 30.0], [1.0, 150.0]]
+    },
+    "Kalkbruk": {
+        "category": "▬▬▬ 🪨 PUTS OCH BRUK ▬▬▬",
+        "lambda": 0.80,
+        "density": 1600.0,
+        "heat_capacity": 1000.0,
+        "mu": 15.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 25.0], [1.0, 180.0]]
+    },
+    "Puts (Cement/Kalk)": {
+        "category": "▬▬▬ 🪨 PUTS OCH BRUK ▬▬▬",
+        "lambda": 1.00,
+        "density": 1800.0,
+        "heat_capacity": 1000.0,
+        "mu": 20.0,
+        "porosity": 0.25,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 25.0], [1.0, 160.0]]
+    },
+    "Klinker / Keramik": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 1.20,
+        "density": 2000.0,
+        "heat_capacity": 800.0,
+        "mu": 200.0,
+        "porosity": 0.05,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 10.0]]
+    },
+    "Natursten (Granit)": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 3.50,
+        "density": 2800.0,
+        "heat_capacity": 1000.0,
+        "mu": 10000.0,
+        "porosity": 0.01,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "Natursten (Marmor)": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 2.80,
+        "density": 2600.0,
+        "heat_capacity": 1000.0,
+        "mu": 10000.0,
+        "porosity": 0.01,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "Kalksten": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 2.20,
+        "density": 2400.0,
+        "heat_capacity": 1000.0,
+        "mu": 200.0,
+        "porosity": 0.10,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 10.0], [1.0, 50.0]]
+    },
+    "Plastmatta": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 0.25,
+        "density": 1200.0,
+        "heat_capacity": 1500.0,
+        "mu": 50000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Linoleummatta": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 0.17,
+        "density": 1200.0,
+        "heat_capacity": 1500.0,
+        "mu": 1000.0,
+        "porosity": 0.05,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 20.0], [1.0, 40.0]]
+    },
+    "Parkettgolv (Trä)": {
+        "category": "▬▬▬ 🏢 YTSKIKT ▬▬▬",
+        "lambda": 0.14,
+        "density": 600.0,
+        "heat_capacity": 1600.0,
+        "mu": 50.0,
+        "porosity": 0.65,
+        "sorption_isotherm": [[0.0, 0.0], [0.5, 50.0], [0.8, 90.0], [1.0, 160.0]]
+    },
+    "Stål": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 50.00,
+        "density": 7800.0,
+        "heat_capacity": 450.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Rostfritt stål": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 17.00,
+        "density": 7900.0,
+        "heat_capacity": 500.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Aluminium": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 200.00,
+        "density": 2700.0,
+        "heat_capacity": 880.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Koppar": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 380.00,
+        "density": 8900.0,
+        "heat_capacity": 380.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Mässing": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 120.00,
+        "density": 8500.0,
+        "heat_capacity": 380.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Glas (Enkelglas)": {
+        "category": "▬▬▬ 🪟 METALL OCH GLAS ▬▬▬",
+        "lambda": 1.00,
+        "density": 2500.0,
+        "heat_capacity": 840.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Plastfolie (Ångspärr, PE)": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.33,
+        "density": 920.0,
+        "heat_capacity": 2200.0,
+        "mu": 250000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Ångbroms (Variabel/Fuktadaptiv)": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.33,
+        "density": 920.0,
+        "heat_capacity": 2200.0,
+        "mu": 10000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Vindduk (Diffusionsöppen)": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.20,
+        "density": 400.0,
+        "heat_capacity": 1500.0,
+        "mu": 100.0,
+        "porosity": 0.50,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "Underlagspapp (Tak)": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.17,
+        "density": 1100.0,
+        "heat_capacity": 1500.0,
+        "mu": 1000.0,
+        "porosity": 0.05,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.5]]
+    },
+    "Asfalt/Bitumenmatta": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.17,
+        "density": 1100.0,
+        "heat_capacity": 1500.0,
+        "mu": 30000.0,
+        "porosity": 0.05,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.5]]
+    },
+    "EPDM Gummiduk": {
+        "category": "▬▬▬ 🛡️ MEMBRAN OCH PLAST ▬▬▬",
+        "lambda": 0.25,
+        "density": 1150.0,
+        "heat_capacity": 1500.0,
+        "mu": 35000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Sand": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 1.50,
+        "density": 1800.0,
+        "heat_capacity": 850.0,
+        "mu": 50.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 10.0]]
+    },
+    "Makadam / Grus": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 2.00,
+        "density": 1800.0,
+        "heat_capacity": 850.0,
+        "mu": 50.0,
+        "porosity": 0.30,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 10.0]]
+    },
+    "Lera (Torr)": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 0.50,
+        "density": 1600.0,
+        "heat_capacity": 1500.0,
+        "mu": 50.0,
+        "porosity": 0.40,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 30.0], [1.0, 100.0]]
+    },
+    "Lera (Fuktig)": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 1.50,
+        "density": 2000.0,
+        "heat_capacity": 1500.0,
+        "mu": 50.0,
+        "porosity": 0.40,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 50.0], [1.0, 150.0]]
+    },
+    "Matjord": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 1.00,
+        "density": 1600.0,
+        "heat_capacity": 1000.0,
+        "mu": 50.0,
+        "porosity": 0.45,
+        "sorption_isotherm": [[0.0, 0.0], [0.8, 40.0], [1.0, 200.0]]
+    },
+    "Asfalt": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 0.70,
+        "density": 2100.0,
+        "heat_capacity": 1000.0,
+        "mu": 50000.0,
+        "porosity": 0.05,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 1.0]]
+    },
+    "Is": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 2.20,
+        "density": 917.0,
+        "heat_capacity": 2050.0,
+        "mu": 1000000.0,
+        "porosity": 0.0,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    },
+    "Snö": {
+        "category": "▬▬▬ 🌍 MARK OCH ÖVRIGT ▬▬▬",
+        "lambda": 0.30,
+        "density": 300.0,
+        "heat_capacity": 2090.0,
+        "mu": 1.0,
+        "porosity": 0.70,
+        "sorption_isotherm": [[0.0, 0.0], [1.0, 0.0]]
+    }
+}

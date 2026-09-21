@@ -1,0 +1,136 @@
+[
+    {
+        "namn": "1. Yttervägg Trä (145 stomme, Fritidshus)", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.01,
+        "layers": [
+            {"Type": "Solid", "Material": "Gipsskiva (Standard)", "Tjocklek (mm)": 13.0, "Parts": [{"fraction": 1.0, "lambda": 0.22}], "Lambda_eff": 0.22, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Standard) [λ=0.220]", "thick": 13.0}},
+            {"Type": "Solid", "Material": "Plywood", "Tjocklek (mm)": 12.0, "Parts": [{"fraction": 1.0, "lambda": 0.13}], "Lambda_eff": 0.13, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Plywood [λ=0.130]", "thick": 12.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 145.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 145.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Gipsskiva (Ute/Vindskydd)", "Tjocklek (mm)": 9.0, "Parts": [{"fraction": 1.0, "lambda": 0.25}], "Lambda_eff": 0.25, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Ute/Vindskydd) [λ=0.250]", "thick": 9.0}},
+            {"Type": "Air", "Material": "Ventilerad luftspalt", "Tjocklek (mm)": 28.0, "R": 0.0, "Lambda_eff": "-", "Color": "#E8F8F5", "is_ventilated": true, "RawData": {"type": "Ventilerad luftspalt (R = 0)", "name": "Ventilerad luftspalt", "thick": 28.0}},
+            {"Type": "Solid", "Material": "Träpanel (Fasad)", "Tjocklek (mm)": 22.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Träpanel (Fasad) [λ=0.140]", "thick": 22.0}}
+        ]
+    },
+    {
+        "namn": "2. Yttervägg Trä (220+45 stomme, Standard)", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.01,
+        "layers": [
+            {"Type": "Solid", "Material": "Gipsskiva (Standard)", "Tjocklek (mm)": 13.0, "Parts": [{"fraction": 1.0, "lambda": 0.22}], "Lambda_eff": 0.22, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Standard) [λ=0.220]", "thick": 13.0}},
+            {"Type": "Solid", "Material": "Plywood", "Tjocklek (mm)": 12.0, "Parts": [{"fraction": 1.0, "lambda": 0.13}], "Lambda_eff": 0.13, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Plywood [λ=0.130]", "thick": 12.0}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 45.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 45.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 220.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 220.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Gipsskiva (Ute/Vindskydd)", "Tjocklek (mm)": 9.0, "Parts": [{"fraction": 1.0, "lambda": 0.25}], "Lambda_eff": 0.25, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Ute/Vindskydd) [λ=0.250]", "thick": 9.0}},
+            {"Type": "Air", "Material": "Ventilerad luftspalt", "Tjocklek (mm)": 28.0, "R": 0.0, "Lambda_eff": "-", "Color": "#E8F8F5", "is_ventilated": true, "RawData": {"type": "Ventilerad luftspalt (R = 0)", "name": "Ventilerad luftspalt", "thick": 28.0}},
+            {"Type": "Solid", "Material": "Träpanel (Fasad)", "Tjocklek (mm)": 22.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Träpanel (Fasad) [λ=0.140]", "thick": 22.0}}
+        ]
+    },
+    {
+        "namn": "3. Yttervägg Trä (300 stomme, Passivhus)", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.00,
+        "layers": [
+            {"Type": "Solid", "Material": "Gipsskiva (Standard)", "Tjocklek (mm)": 13.0, "Parts": [{"fraction": 1.0, "lambda": 0.22}], "Lambda_eff": 0.22, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Standard) [λ=0.220]", "thick": 13.0}},
+            {"Type": "Solid", "Material": "Plywood", "Tjocklek (mm)": 12.0, "Parts": [{"fraction": 1.0, "lambda": 0.13}], "Lambda_eff": 0.13, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Plywood [λ=0.130]", "thick": 12.0}},
+            {"Type": "Solid", "Material": "Mineralull (Lågenergi) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 45.0, "Parts": [{"fraction": 0.925, "lambda": 0.033}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.041, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Lågenergi) [λ=0.033]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 45.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "Mineralull (Lågenergi) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 300.0, "Parts": [{"fraction": 0.925, "lambda": 0.033}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.041, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Lågenergi) [λ=0.033]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 300.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Träfiberisolering (Skiva)", "Tjocklek (mm)": 50.0, "Parts": [{"fraction": 1.0, "lambda": 0.038}], "Lambda_eff": 0.038, "Color": "#F4D03F", "RawData": {"type": "Standardmaterial", "mat": "Träfiberisolering (Skiva) [λ=0.038]", "thick": 50.0}},
+            {"Type": "Air", "Material": "Ventilerad luftspalt", "Tjocklek (mm)": 28.0, "R": 0.0, "Lambda_eff": "-", "Color": "#E8F8F5", "is_ventilated": true, "RawData": {"type": "Ventilerad luftspalt (R = 0)", "name": "Ventilerad luftspalt", "thick": 28.0}},
+            {"Type": "Solid", "Material": "Träpanel (Fasad)", "Tjocklek (mm)": 22.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Träpanel (Fasad) [λ=0.140]", "thick": 22.0}}
+        ]
+    },
+    {
+        "namn": "4. Yttervägg Lättbetong (400mm Massiv)", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.00,
+        "layers": [
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 10.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 10.0}},
+            {"Type": "Solid", "Material": "Lättbetong (Densitet 400)", "Tjocklek (mm)": 400.0, "Parts": [{"fraction": 1.0, "lambda": 0.11}], "Lambda_eff": 0.11, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Lättbetong (Densitet 400) [λ=0.110]", "thick": 400.0}},
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 15.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 15.0}}
+        ]
+    },
+    {
+        "namn": "5. Yttervägg Lättbetong (Isolerad 300+100)", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.01,
+        "layers": [
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 10.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 10.0}},
+            {"Type": "Solid", "Material": "Lättbetong (Densitet 500)", "Tjocklek (mm)": 300.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Lättbetong (Densitet 500) [λ=0.140]", "thick": 300.0}},
+            {"Type": "Solid", "Material": "Cellplast EPS (Grafit)", "Tjocklek (mm)": 100.0, "Parts": [{"fraction": 1.0, "lambda": 0.031}], "Lambda_eff": 0.031, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "Cellplast EPS (Grafit) [λ=0.031]", "thick": 100.0}},
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 15.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 15.0}}
+        ]
+    },
+    {
+        "namn": "6. Yttervägg Betong & Fasadtegel", "flode": "Horisontellt (t.ex. Yttervägg)", "b_factor": 1.0, "delta_u": 0.03,
+        "layers": [
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 10.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 10.0}},
+            {"Type": "Solid", "Material": "Armerad betong (Tung)", "Tjocklek (mm)": 150.0, "Parts": [{"fraction": 1.0, "lambda": 1.7}], "Lambda_eff": 1.7, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Armerad betong (Tung) [λ=1.700]", "thick": 150.0}},
+            {"Type": "Solid", "Material": "Cellplast EPS (Grafit)", "Tjocklek (mm)": 200.0, "Parts": [{"fraction": 1.0, "lambda": 0.031}], "Lambda_eff": 0.031, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "Cellplast EPS (Grafit) [λ=0.031]", "thick": 200.0}},
+            {"Type": "Air", "Material": "Ventilerad luftspalt", "Tjocklek (mm)": 30.0, "R": 0.0, "Lambda_eff": "-", "Color": "#E8F8F5", "is_ventilated": true, "RawData": {"type": "Ventilerad luftspalt (R = 0)", "name": "Ventilerad luftspalt", "thick": 30.0}},
+            {"Type": "Solid", "Material": "Fasadtegel", "Tjocklek (mm)": 120.0, "Parts": [{"fraction": 1.0, "lambda": 0.6}], "Lambda_eff": 0.6, "Color": "#CB4335", "RawData": {"type": "Standardmaterial", "mat": "Fasadtegel [λ=0.600]", "thick": 120.0}}
+        ]
+    },
+    {
+        "namn": "7. Vindsbjälklag (500mm Lösull)", "flode": "Uppåtriktat (t.ex. Yttertak)", "b_factor": 0.8, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Gipsskiva (Standard)", "Tjocklek (mm)": 13.0, "Parts": [{"fraction": 1.0, "lambda": 0.22}], "Lambda_eff": 0.22, "Color": "#E5E7E9", "RawData": {"type": "Standardmaterial", "mat": "Gipsskiva (Standard) [λ=0.220]", "thick": 13.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "Cellulosaisolering (Lösull)", "Tjocklek (mm)": 500.0, "Parts": [{"fraction": 1.0, "lambda": 0.039}], "Lambda_eff": 0.039, "Color": "#F4D03F", "RawData": {"type": "Standardmaterial", "mat": "Cellulosaisolering (Lösull) [λ=0.039]", "thick": 500.0}}
+        ]
+    },
+    {
+        "namn": "8. Parallelltak / Ryggåstak (Isol 220+45)", "flode": "Uppåtriktat (t.ex. Yttertak)", "b_factor": 1.0, "delta_u": 0.01,
+        "layers": [
+            {"Type": "Solid", "Material": "Träpanel (Fasad) (Innetak)", "Tjocklek (mm)": 14.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Träpanel (Fasad) [λ=0.140]", "thick": 14.0}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 45.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 45.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 220.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 220.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Vindduk / Diffusionsöppen duk", "Tjocklek (mm)": 0.5, "Parts": [{"fraction": 1.0, "lambda": 0.17}], "Lambda_eff": 0.17, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Vindduk / Diffusionsöppen duk [λ=0.170]", "thick": 0.5}},
+            {"Type": "Air", "Material": "Ventilerad luftspalt", "Tjocklek (mm)": 45.0, "R": 0.0, "Lambda_eff": "-", "Color": "#E8F8F5", "is_ventilated": true, "RawData": {"type": "Ventilerad luftspalt (R = 0)", "name": "Ventilerad luftspalt", "thick": 45.0}},
+            {"Type": "Solid", "Material": "Plywood (Råspont)", "Tjocklek (mm)": 22.0, "Parts": [{"fraction": 1.0, "lambda": 0.13}], "Lambda_eff": 0.13, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Plywood [λ=0.130]", "thick": 22.0}},
+            {"Type": "Solid", "Material": "Underlagspapp / Ytpapp", "Tjocklek (mm)": 3.0, "Parts": [{"fraction": 1.0, "lambda": 0.17}], "Lambda_eff": 0.17, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Underlagspapp / Ytpapp [λ=0.170]", "thick": 3.0}}
+        ]
+    },
+    {
+        "namn": "9. Låglutande tak (Utvändig PIR)", "flode": "Uppåtriktat (t.ex. Yttertak)", "b_factor": 1.0, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Armerad betong (Tung)", "Tjocklek (mm)": 200.0, "Parts": [{"fraction": 1.0, "lambda": 1.7}], "Lambda_eff": 1.7, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Armerad betong (Tung) [λ=1.700]", "thick": 200.0}},
+            {"Type": "Solid", "Material": "Plastfolie (Ångspärr, PE)", "Tjocklek (mm)": 0.2, "Parts": [{"fraction": 1.0, "lambda": 0.33}], "Lambda_eff": 0.33, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Plastfolie (Ångspärr, PE) [λ=0.330]", "thick": 0.2}},
+            {"Type": "Solid", "Material": "PIR-skiva", "Tjocklek (mm)": 200.0, "Parts": [{"fraction": 1.0, "lambda": 0.022}], "Lambda_eff": 0.022, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "PIR-skiva [λ=0.022]", "thick": 200.0}},
+            {"Type": "Solid", "Material": "Underlagspapp / Ytpapp", "Tjocklek (mm)": 5.0, "Parts": [{"fraction": 1.0, "lambda": 0.17}], "Lambda_eff": 0.17, "Color": "#273746", "RawData": {"type": "Standardmaterial", "mat": "Underlagspapp / Ytpapp [λ=0.170]", "thick": 5.0}}
+        ]
+    },
+    {
+        "namn": "10. Platta på Mark (300mm Standard)", "flode": "Platta på mark (ISO 13370)", "b_factor": 1.0, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Parkettgolv (Trä)", "Tjocklek (mm)": 14.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Parkettgolv (Trä) [λ=0.140]", "thick": 14.0}},
+            {"Type": "Solid", "Material": "Armerad betong (Tung)", "Tjocklek (mm)": 100.0, "Parts": [{"fraction": 1.0, "lambda": 1.7}], "Lambda_eff": 1.7, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Armerad betong (Tung) [λ=1.700]", "thick": 100.0}},
+            {"Type": "Solid", "Material": "Cellplast EPS (Standard)", "Tjocklek (mm)": 300.0, "Parts": [{"fraction": 1.0, "lambda": 0.038}], "Lambda_eff": 0.038, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "Cellplast EPS (Standard) [λ=0.038]", "thick": 300.0}}
+        ]
+    },
+    {
+        "namn": "11. Platta på Mark (400mm Lågenergi)", "flode": "Platta på mark (ISO 13370)", "b_factor": 1.0, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Parkettgolv (Trä)", "Tjocklek (mm)": 14.0, "Parts": [{"fraction": 1.0, "lambda": 0.14}], "Lambda_eff": 0.14, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Parkettgolv (Trä) [λ=0.140]", "thick": 14.0}},
+            {"Type": "Solid", "Material": "Armerad betong (Tung)", "Tjocklek (mm)": 100.0, "Parts": [{"fraction": 1.0, "lambda": 1.7}], "Lambda_eff": 1.7, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Armerad betong (Tung) [λ=1.700]", "thick": 100.0}},
+            {"Type": "Solid", "Material": "Cellplast EPS (Standard)", "Tjocklek (mm)": 400.0, "Parts": [{"fraction": 1.0, "lambda": 0.038}], "Lambda_eff": 0.038, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "Cellplast EPS (Standard) [λ=0.038]", "thick": 400.0}}
+        ]
+    },
+    {
+        "namn": "12. Krypgrundsbjälklag (Trä 220)", "flode": "Nedåtriktat (t.ex. Golv)", "b_factor": 0.7, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Spånskiva (Golv)", "Tjocklek (mm)": 22.0, "Parts": [{"fraction": 1.0, "lambda": 0.13}], "Lambda_eff": 0.13, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Spånskiva [λ=0.130]", "thick": 22.0}},
+            {"Type": "Solid", "Material": "Mineralull (Standard) + Konstruktionsvirke (Furu/Gran) (c/c 600)", "Tjocklek (mm)": 220.0, "Parts": [{"fraction": 0.925, "lambda": 0.036}, {"fraction": 0.075, "lambda": 0.14}], "Lambda_eff": 0.0438, "Color": "#F4D03F", "RawData": {"type": "Regelverk / Blandat skikt", "m1": "Mineralull (Standard) [λ=0.036]", "m2": "Konstruktionsvirke (Furu/Gran) [λ=0.140]", "thick": 220.0, "width": 45.0, "cc": 600.0}},
+            {"Type": "Solid", "Material": "Träfiberskiva (Porös/Asfaboard)", "Tjocklek (mm)": 12.0, "Parts": [{"fraction": 1.0, "lambda": 0.05}], "Lambda_eff": 0.05, "Color": "#D35400", "RawData": {"type": "Standardmaterial", "mat": "Träfiberskiva (Porös/Asfaboard) [λ=0.050]", "thick": 12.0}}
+        ]
+    },
+    {
+        "namn": "13. Källarvägg / Suterräng Leca (250mm)", "flode": "Källarvägg / Motfylld vägg (ISO 13370)", "b_factor": 1.0, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 10.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 10.0}},
+            {"Type": "Solid", "Material": "Lättklinkerbetong (Leca)", "Tjocklek (mm)": 250.0, "Parts": [{"fraction": 1.0, "lambda": 0.2}], "Lambda_eff": 0.20, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Lättklinkerbetong (Leca) [λ=0.200]", "thick": 250.0}},
+            {"Type": "Solid", "Material": "Puts (Cement/Kalk)", "Tjocklek (mm)": 10.0, "Parts": [{"fraction": 1.0, "lambda": 1.0}], "Lambda_eff": 1.0, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Puts (Cement/Kalk) [λ=1.000]", "thick": 10.0}}
+        ]
+    },
+    {
+        "namn": "14. Källarvägg Betong (Isolerad utvändigt)", "flode": "Källarvägg / Motfylld vägg (ISO 13370)", "b_factor": 1.0, "delta_u": 0.0,
+        "layers": [
+            {"Type": "Solid", "Material": "Armerad betong (Tung)", "Tjocklek (mm)": 150.0, "Parts": [{"fraction": 1.0, "lambda": 1.7}], "Lambda_eff": 1.7, "Color": "#7F8C8D", "RawData": {"type": "Standardmaterial", "mat": "Armerad betong (Tung) [λ=1.700]", "thick": 150.0}},
+            {"Type": "Solid", "Material": "Cellplast EPS (Standard)", "Tjocklek (mm)": 100.0, "Parts": [{"fraction": 1.0, "lambda": 0.038}], "Lambda_eff": 0.038, "Color": "#AED6F1", "RawData": {"type": "Standardmaterial", "mat": "Cellplast EPS (Standard) [λ=0.038]", "thick": 100.0}}
+        ]
+    }
+]
