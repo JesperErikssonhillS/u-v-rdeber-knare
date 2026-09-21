@@ -85,6 +85,11 @@ class TabUm:
 
         ttk.Label(self.frame_um, text="Krav på Um-värde (W/m²K):", font=("Arial", 9, "bold")).grid(row=11, column=0, sticky="w")
         ttk.Entry(self.frame_um, textvariable=self.app_data["um_req_var"], width=10).grid(row=11, column=1, sticky="w", pady=5)
+        ttk.Checkbutton(
+            self.frame_um,
+            text="Skriv ut bedömning om krav uppfylls",
+            variable=self.app_data["print_um_requirement_status"]
+        ).grid(row=12, column=0, columnspan=2, sticky="w", pady=(0, 5))
 
         # Starta UI
         self.on_kb_type_change()

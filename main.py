@@ -33,6 +33,7 @@ class UValueApp:
             "climate_filename": "",
             "um_expanded": True,        
             "um_req_var": tk.StringVar(value="0.40"),
+            "print_um_requirement_status": tk.BooleanVar(value=True),
             "kb_type_var": tk.StringVar(value="Schablon (% påslag)"),
             "kb_val_var": tk.StringVar(value="20"),
             "main_app_instance": self
@@ -137,25 +138,46 @@ class UValueApp:
         self.btn_tech_pdf = ttk.Button(self.frame_pdf_btns, text="📐 Generera Teknisk Beräkningsrapport", command=self.pdf_gen.generate_technical)
         self.btn_tech_pdf.pack(pady=2)
 
-    def save_project(self):
-        if not self.app_data["current_filepath"]:
-            self.save_project_as()
-            return
-            
-        data_to_save = {
-            "company": self.app_data["company_var"].get(), 
+    def _serialize_project_data(self):
+        return {
+            "company": self.app_data["company_var"].get(),
             "proj_name": self.app_data["proj_name_var"].get(),
             "proj_num": self.app_data["proj_num_var"].get(),
             "signature": self.app_data["sig_var"].get(),
             "kund": self.app_data["kund_var"].get(),
-            "um_expanded": self.app_data["um_expanded"],
+            "um_expanded": bool(self.app_data.get("um_expanded", True)),
             "um_req": self.app_data["um_req_var"].get(),
+            "print_um_requirement_status": bool(self.app_data["print_um_requirement_status"].get()),
             "kb_type": self.app_data["kb_type_var"].get(),
             "kb_val": self.app_data["kb_val_var"].get(),
             "thermal_bridges": self.app_data["thermal_bridges"],
             "saved_parts": self.app_data["saved_parts"],
             "moisture_indices": self.app_data["moisture_indices"]
         }
+
+    def _restore_project_data(self, data):
+        loaded_company = data.get("company", "")
+        self.app_data["company_var"].set(loaded_company if loaded_company else "Hillstatik AB")
+        self.app_data["proj_name_var"].set(data.get("proj_name", ""))
+        self.app_data["proj_num_var"].set(data.get("proj_num", ""))
+        self.app_data["sig_var"].set(data.get("signature", ""))
+        self.app_data["kund_var"].set(data.get("kund", ""))
+        self.app_data["um_req_var"].set(data.get("um_req", "0.40"))
+        self.app_data["um_expanded"] = bool(data.get("um_expanded", True))
+        self.app_data["print_um_requirement_status"].set(data.get("print_um_requirement_status", True))
+
+        self.app_data["kb_type_var"].set(data.get("kb_type", "Schablon (% påslag)"))
+        self.app_data["kb_val_var"].set(data.get("kb_val", "20"))
+        self.app_data["thermal_bridges"] = data.get("thermal_bridges", [])
+        self.app_data["saved_parts"] = data.get("saved_parts", [])
+        self.app_data["moisture_indices"] = data.get("moisture_indices", [])
+
+    def save_project(self):
+        if not self.app_data["current_filepath"]:
+            self.save_project_as()
+            return
+
+        data_to_save = self._serialize_project_data()
         try:
             with open(self.app_data["current_filepath"], 'w', encoding='utf-8') as f:
                 json.dump(data_to_save, f, indent=4, ensure_ascii=False)
@@ -164,20 +186,7 @@ class UValueApp:
             messagebox.showerror("Fel", f"Kunde inte spara projektet:\n{e}")
 
     def save_project_as(self):
-        data_to_save = {
-            "company": self.app_data["company_var"].get(), 
-            "proj_name": self.app_data["proj_name_var"].get(),
-            "proj_num": self.app_data["proj_num_var"].get(),
-            "signature": self.app_data["sig_var"].get(),
-            "kund": self.app_data["kund_var"].get(),
-            "um_expanded": self.app_data["um_expanded"],
-            "um_req": self.app_data["um_req_var"].get(),
-            "kb_type": self.app_data["kb_type_var"].get(),
-            "kb_val": self.app_data["kb_val_var"].get(),
-            "thermal_bridges": self.app_data["thermal_bridges"],
-            "saved_parts": self.app_data["saved_parts"],
-            "moisture_indices": self.app_data["moisture_indices"]
-        }
+        data_to_save = self._serialize_project_data()
         filepath = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("U-värdesprojekt", "*.json")], title="Spara projekt som...")
         if filepath:
             try:
@@ -194,28 +203,15 @@ class UValueApp:
             try:
                 with open(filepath, 'r', encoding='utf-8') as f:
                     data = json.load(f)
-                
-                loaded_company = data.get("company", "")
-                self.app_data["company_var"].set(loaded_company if loaded_company else "Hillstatik AB") 
-                self.app_data["proj_name_var"].set(data.get("proj_name", ""))
-                self.app_data["proj_num_var"].set(data.get("proj_num", ""))
-                self.app_data["sig_var"].set(data.get("signature", ""))
-                self.app_data["kund_var"].set(data.get("kund", ""))
-                self.app_data["um_req_var"].set(data.get("um_req", "0.40"))
-                
-                self.app_data["kb_type_var"].set(data.get("kb_type", "Schablon (% påslag)"))
-                self.app_data["kb_val_var"].set(data.get("kb_val", "20"))
-                self.app_data["thermal_bridges"] = data.get("thermal_bridges", [])
-                self.app_data["saved_parts"] = data.get("saved_parts", [])
-                self.app_data["moisture_indices"] = data.get("moisture_indices", [])
-                
+
+                self._restore_project_data(data)
                 self.app_data["current_filepath"] = filepath
-                
+
                 self.sync_all_lists()
                 if hasattr(self.tab3_logic, "on_kb_type_change"):
                     self.tab3_logic.on_kb_type_change()
                     self.tab3_logic.refresh_kb_list()
-                
+
                 messagebox.showinfo("Laddat", "Projektet har laddats in!")
             except Exception as e:
                 messagebox.showerror("Fel", f"Kunde inte ladda projektet.\n{e}")

@@ -338,7 +338,13 @@ class PDFGenerator:
             except ValueError:
                 um_req = 0.0
 
-            if um_req > 0:
+            requirement_status_value = data.get("print_um_requirement_status")
+            if hasattr(requirement_status_value, "get"):
+                include_requirement_status = bool(requirement_status_value.get())
+            else:
+                include_requirement_status = bool(requirement_status_value if requirement_status_value is not None else True)
+
+            if um_req > 0 and include_requirement_status:
                 pdf.set_font("helvetica", size=12, style="I")
                 pdf.cell(0, 6, f"Krav på Um-värde: {um_req:.3f} W/(m²K)", new_x="LMARGIN", new_y="NEXT")
 
