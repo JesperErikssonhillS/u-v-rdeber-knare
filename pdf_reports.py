@@ -3,6 +3,7 @@ import sys
 import base64
 import subprocess
 import math
+import tempfile
 from tkinter import messagebox, filedialog
 from fpdf import FPDF
 from datetime import date
@@ -45,7 +46,74 @@ class PDFGenerator:
         decimals = max(0, min(4, decimals))
         return f"{value:.{decimals}f}"
 
-    def generate_summary(self, include_um=True):
+    def _save_report(self, pdf, initial_file_name, success_message, output_format: str):
+        if output_format not in ("pdf", "docx"):
+            raise ValueError(f"Unsupported report format: {output_format}")
+
+        extension = f".{output_format}"
+        initial_file_name = os.path.splitext(initial_file_name)[0] + extension
+        filetypes = [("PDF", "*.pdf")] if output_format == "pdf" else [("Word-dokument", "*.docx")]
+
+        if output_format == "docx":
+            try:
+                from pdf2docx import Converter
+            except ImportError as e:
+                requirements_path = os.path.join(
+                    os.path.dirname(os.path.abspath(__file__)),
+                    "requirements.txt"
+                )
+                install_command = (
+                    f'"{sys.executable}" -m pip install -r "{requirements_path}"'
+                )
+                messagebox.showerror(
+                    "Word-export saknas",
+                    "Kunde inte importera pdf2docx med programmets Python:\n"
+                    f"{sys.executable}\n\n"
+                    f"Fel: {e}\n\n"
+                    "Installera beroendena i just denna Python-miljö med:\n"
+                    f"{install_command}"
+                )
+                return
+
+        filepath = filedialog.asksaveasfilename(
+            defaultextension=extension,
+            filetypes=filetypes,
+            initialfile=initial_file_name
+        )
+        if not filepath:
+            return
+
+        filepath = os.path.splitext(filepath)[0] + extension
+
+        try:
+            if output_format == "pdf":
+                pdf.output(filepath)
+            else:
+                output_dir = os.path.dirname(os.path.abspath(filepath))
+                with tempfile.TemporaryDirectory(dir=output_dir) as temp_dir:
+                    pdf_path = os.path.join(temp_dir, "report.pdf")
+                    docx_path = os.path.join(temp_dir, "report.docx")
+                    pdf.output(pdf_path)
+                    converter = Converter(pdf_path)
+                    try:
+                        converter.convert(docx_path)
+                    finally:
+                        converter.close()
+                    os.replace(docx_path, filepath)
+
+            messagebox.showinfo("Succé!", success_message)
+
+            if sys.platform == "win32":
+                os.startfile(filepath)
+            elif sys.platform == "darwin":
+                subprocess.call(["open", filepath])
+            else:
+                subprocess.call(["xdg-open", filepath])
+
+        except Exception as e:
+            messagebox.showerror("Fel vid sparning", f"Kunde inte spara filen: {e}")
+
+    def generate_summary(self, include_um=True, output_format: str = "pdf"):
         data = self.app_data
         
         if not data["saved_parts"]:
@@ -64,9 +132,6 @@ class PDFGenerator:
         proj_namn = data["proj_name_var"].get().strip() or "Projektnamn"
         rapporttyp = "U-värden_Sammanställning" if include_um else "Byggnadsdelar"
         foreslaget_filnamn = f"{proj_namn.replace(' ', '_')}_{rapporttyp}.pdf"
-        
-        filepath = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF", "*.pdf")], initialfile=foreslaget_filnamn)
-        if not filepath: return 
             
         pdf = FPDF()
         pdf.add_page()
@@ -393,21 +458,14 @@ class PDFGenerator:
 
                 pdf.set_text_color(0, 0, 0)
 
-        try:
-            pdf.output(filepath)
-            messagebox.showinfo("Succé!", "Rapporten sparades!")
-            
-            if sys.platform == "win32":
-                os.startfile(filepath)
-            elif sys.platform == "darwin":
-                subprocess.call(["open", filepath])
-            else:
-                subprocess.call(["xdg-open", filepath])
-                
-        except Exception as e:
-            messagebox.showerror("Fel vid sparning", f"Kunde inte spara filen: {e}")
+        self._save_report(
+            pdf,
+            foreslaget_filnamn,
+            "Rapporten sparades!",
+            output_format
+        )
 
-    def generate_technical(self):
+    def generate_technical(self, output_format: str = "pdf"):
         data = self.app_data
         
         if not data["saved_parts"]:
@@ -416,9 +474,6 @@ class PDFGenerator:
             
         proj_namn = data["proj_name_var"].get().strip() or "Projektnamn"
         foreslaget_filnamn = f"{proj_namn.replace(' ', '_')}_Teknisk_Beräkningsrapport.pdf"
-        
-        filepath = filedialog.asksaveasfilename(defaultextension=".pdf", filetypes=[("PDF", "*.pdf")], initialfile=foreslaget_filnamn)
-        if not filepath: return 
             
         pdf = FPDF()
         
@@ -941,16 +996,9 @@ class PDFGenerator:
         pdf.set_font("helvetica", size=10)
         pdf.multi_cell(0, 6, "Metoden beaktar endast ångdiffusion (ekvivalent luftlager sd = my * d) och hanterar ej kapillär vätsketransport eller inbyggd byggfukt.", new_x="LMARGIN", new_y="NEXT")
 
-        try:
-            pdf.output(filepath)
-            messagebox.showinfo("Succé!", "Teknisk beräkningsrapport sparad!")
-            
-            if sys.platform == "win32":
-                os.startfile(filepath)
-            elif sys.platform == "darwin":
-                subprocess.call(["open", filepath])
-            else:
-                subprocess.call(["xdg-open", filepath])
-                
-        except Exception as e:
-            messagebox.showerror("Fel vid sparning", f"Kunde inte spara filen: {e}")
+        self._save_report(
+            pdf,
+            foreslaget_filnamn,
+            "Teknisk beräkningsrapport sparad!",
+            output_format
+        )

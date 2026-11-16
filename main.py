@@ -137,11 +137,32 @@ class UValueApp:
         self.btn_pdf = ttk.Button(self.frame_pdf_btns, text="📄 Generera PDF-rapport (Sammanställning)", command=self.pdf_gen.generate_summary)
         self.btn_pdf.pack(pady=2)
 
+        self.btn_word = ttk.Button(
+            self.frame_pdf_btns,
+            text="📝 Generera Word-rapport (Sammanställning)",
+            command=lambda: self.pdf_gen.generate_summary(output_format="docx")
+        )
+        self.btn_word.pack(pady=2)
+
         self.btn_parts_pdf = ttk.Button(self.frame_pdf_btns, text="📄 Generera rapport för byggnadsdelar", command=lambda: self.pdf_gen.generate_summary(include_um=False))
         self.btn_parts_pdf.pack(pady=2)
         
+        self.btn_parts_word = ttk.Button(
+            self.frame_pdf_btns,
+            text="📝 Generera Word-rapport för byggnadsdelar",
+            command=lambda: self.pdf_gen.generate_summary(include_um=False, output_format="docx")
+        )
+        self.btn_parts_word.pack(pady=2)
+
         self.btn_tech_pdf = ttk.Button(self.frame_pdf_btns, text="📐 Generera Teknisk Beräkningsrapport", command=self.pdf_gen.generate_technical)
         self.btn_tech_pdf.pack(pady=2)
+
+        self.btn_tech_word = ttk.Button(
+            self.frame_pdf_btns,
+            text="📝 Generera Teknisk Word-rapport",
+            command=lambda: self.pdf_gen.generate_technical(output_format="docx")
+        )
+        self.btn_tech_word.pack(pady=2)
 
     def _serialize_project_data(self):
         return {
